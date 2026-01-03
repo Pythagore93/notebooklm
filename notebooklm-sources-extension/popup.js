@@ -176,6 +176,13 @@ function renderData() {
                 <div class="source-item-name">📄 ${escapeHtml(s.name)}</div>
             </div>
         `).join('') + (sources.length > 30 ? `<div class="source-item more">+ ${sources.length - 30} autres</div>` : '');
+    } else {
+        sourcesList.innerHTML = `
+            <div class="empty-state">
+                <div class="empty-state-icon">📄</div>
+                <p>Aucune source détectée</p>
+            </div>
+        `;
     }
 
     // ARTIFACTS
@@ -200,6 +207,14 @@ function renderData() {
         document.querySelectorAll('.artifact-item').forEach(el => {
             el.addEventListener('click', () => selectArtifact(el.dataset.id));
         });
+    } else {
+        artifactsList.innerHTML = `
+            <div class="empty-state">
+                <div class="empty-state-icon">📭</div>
+                <p>Aucun artefact détecté</p>
+                <p class="help-text">Cliquez sur "Scanner la page" ou naviguez un peu.</p>
+            </div>
+        `;
     }
 }
 
