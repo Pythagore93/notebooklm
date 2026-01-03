@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NotebookLM Sources Extractor</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 NotebookLM Sources</h1>
+            <p class="subtitle">Extractor v1.1</p>
+        </div>
+
+        <div class="content">
+            <!-- Message d'instruction initial -->
+            <div id="instructions" class="instructions-box" style="display: none;">
+                <div class="instructions-icon">💡</div>
+                <p><strong>Comment utiliser l'extension :</strong></p>
+                <ol>
+                    <li>Ouvrez un notebook sur <a href="https://notebooklm.google.com" target="_blank">notebooklm.google.com</a></li>
+                    <li>Naviguez dans le panneau "Sources" et "Studio"</li>
+                    <li>Cliquez sur vos artefacts (vidéos, podcasts)</li>
+                    <li>Revenez ici et cliquez "Actualiser"</li>
+                </ol>
+            </div>
+
+            <!-- Section des artefacts -->
+            <div class="section">
+                <h2>🎬 Contenus Générés</h2>
+                <div id="artifacts-list" class="artifacts-list">
+                    <p class="loading">🔄 Chargement des artefacts...</p>
+                </div>
+            </div>
+
+            <!-- Section des sources -->
+            <div class="section">
+                <h2>📄 Sources Disponibles</h2>
+                <div id="sources-list" class="sources-list">
+                    <p class="loading">🔄 Chargement des sources...</p>
+                </div>
+            </div>
+
+            <!-- Section des détails -->
+            <div class="section" id="details-section" style="display: none;">
+                <h2>🔗 Sources de l'Artefact Sélectionné</h2>
+                <div id="artifact-details" class="artifact-details">
+                    <p class="loading">Sélectionnez un artefact</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <button id="refresh-btn" class="btn btn-primary">🔄 Actualiser</button>
+            <button id="scan-btn" class="btn btn-secondary">🔍 Scanner la page</button>
+            <button id="copy-btn" class="btn btn-secondary" style="display: none;">📋 Copier</button>
+        </div>
+
+        <div class="status-bar" id="status-bar">
+            <span id="status-text">En attente...</span>
+        </div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>

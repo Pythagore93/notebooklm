@@ -1,0 +1,44 @@
+{
+  "manifest_version": 3,
+  "name": "NotebookLM Sources Extractor",
+  "version": "1.1.0",
+  "description": "Extrait et affiche les sources exactes des contenus générés dans NotebookLM Studio",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage"
+  ],
+  "host_permissions": [
+    "https://notebooklm.google.com/*",
+    "https://*.notebooklm.google.com/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "NotebookLM Sources Extractor"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://notebooklm.google.com/*",
+        "https://*.notebooklm.google.com/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["injected.js"],
+      "matches": ["https://notebooklm.google.com/*", "https://*.notebooklm.google.com/*"]
+    }
+  ]
+}
