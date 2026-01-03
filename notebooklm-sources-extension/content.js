@@ -140,6 +140,7 @@ function scanTextForIds(text) {
 function scanDOM() {
   log('Scanning DOM data...');
   let changes = false;
+  const notebookTitle = document.querySelector('h1')?.textContent?.trim();
 
   // 1. Scanner le panneau des SOURCES (à gauche)
   // Sélecteur large pour trouver des listes d'éléments
@@ -184,13 +185,18 @@ function scanDOM() {
     if (text.match(/(\d+)\s*source/i)) {
       // C'est potentiellement un artefact
       // Remonter pour trouver le titre (souvent le sibling ou le parent)
-      let container = el.closest('[role="button"]') || el.parentElement;
+      let container = el.closest('[role="button"]');
       if (container) {
         const titleEl = container.querySelector('h3, .title, [class*="Title"]');
-        const title = titleEl ? titleEl.textContent : container.textContent.split('\n')[0];
+        if (!titleEl) continue;
+        const title = titleEl.textContent;
         const cleanTitle = title.trim();
 
-        if (cleanTitle.length > 3 && !cleanTitle.includes('source')) {
+        if (
+          cleanTitle.length > 3 &&
+          !cleanTitle.includes('source') &&
+          (!notebookTitle || cleanTitle !== notebookTitle)
+        ) {
           const id = 'dom-art-' + btoa(unescape(encodeURIComponent(cleanTitle))).replace(/[^a-zA-Z0-9]/g, '').substring(0, 15);
           const countMatch = text.match(/(\d+)\s*source/i);
           const count = countMatch ? parseInt(countMatch[1]) : 0;
